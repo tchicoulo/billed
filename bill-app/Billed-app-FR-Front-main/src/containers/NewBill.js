@@ -15,8 +15,16 @@ export default class NewBill {
     this.fileUrl = null;
     this.fileName = null;
     this.billId = null;
+    const iconWindow = document.querySelector(`div#layout-icon1`);
+    if (iconWindow)
+      iconWindow.addEventListener("click", this.handleClickIconWindow);
     new Logout({ document, localStorage, onNavigate });
   }
+
+  handleClickIconWindow = () => {
+    this.onNavigate(ROUTES_PATH["Bills"]);
+  };
+
   handleChangeFile = (e) => {
     e.preventDefault();
     const file = this.document.querySelector(`input[data-testid="file"]`)
