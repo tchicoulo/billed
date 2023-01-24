@@ -44,7 +44,6 @@ export default class {
         .bills()
         .list()
         .then((snapshot) => {
-          console.log(snapshot);
           const sorted = snapshot.sort(
             (a, b) => new Date(b.date) - new Date(a.date)
           );
@@ -55,11 +54,7 @@ export default class {
               status: formatStatus(doc.status),
             };
           });
-          console.log("length", bills.length);
           return bills;
-        })
-        .catch((err) => {
-          console.log(err);
         });
     }
   };
