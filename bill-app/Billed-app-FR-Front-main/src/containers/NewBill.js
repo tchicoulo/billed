@@ -25,60 +25,47 @@ export default class NewBill {
     this.onNavigate(ROUTES_PATH["Bills"]);
   };
 
-  handleChangeFiles = (e) => {
-    e.preventDefault();
-    const file = this.document.querySelector(`input[data-testid="file"]`)
-      .files[0];
-    const filePath = e.target.value.split(/\\/g);
-    const fileName = filePath[filePath.length - 1];
-    const formData = new FormData();
-    const email = JSON.parse(localStorage.getItem("user")).email;
-    formData.append("file", file);
-    formData.append("email", email);
-
-    this.store
-      .bills()
-      .create({
-        data: formData,
-        headers: {
-          noContentType: true,
-        },
-      })
-      .then(({ fileUrl, key }) => {
-        console.log(fileUrl);
-        this.billId = key;
-        this.fileUrl = fileUrl;
-        this.fileName = fileName;
-      })
-      .catch((err) => console.log(err));
-  };
-
   handleChangeFile = (e) => {
     e.preventDefault();
-    const file = this.document.querySelector(`input[data-testid="file"]`)
+    let file = this.document.querySelector(`input[data-testid="file"]`)
       .files[0];
-    console.log(file);
     const filePath = e.target.value.split(/\\/g);
     const fileName = filePath[filePath.length - 1];
     const formData = new FormData();
 
-    const email = JSON.parse(localStorage.getItem("user")).email;
-    formData.append("file", file);
-    formData.append("email", email);
+    let extensionFile = fileName.split(".")[1];
+    localStorage.setItem("ExtentionFile", extensionFile);
+    let getFileExtension = localStorage.getItem("ExtentionFile");
 
-    this.store
-      .bills()
-      .create({
-        data: formData,
-        headers: {
-          noContentType: true,
-        },
-      })
-      .then(({ fileUrl, key }) => {
-        this.billId = key;
-        this.fileUrl = fileUrl;
-        this.fileName = fileName;
-      });
+    //Condition* Verifier l'extension de l'image
+    if (
+      getFileExtension === "jpg" ||
+      getFileExtension === "jpeg" ||
+      getFileExtension === "png"
+    ) {
+      const email = JSON.parse(localStorage.getItem("user")).email;
+      formData.append("file", file);
+      formData.append("email", email);
+
+      this.store
+        .bills()
+        .create({
+          data: formData,
+          headers: {
+            noContentType: true,
+          },
+        })
+        .then(({ fileUrl, key }) => {
+          this.billId = key;
+          this.fileUrl = fileUrl;
+          this.fileName = fileName;
+        });
+    } else {
+      alert(
+        "L'extension de l'image n'est pas autorisée. \n Extensions d'image acceptées : 'jpg', 'jpeg', 'png'"
+      );
+      e.target.value = "";
+    }
   };
 
   handleSubmit = (e) => {
@@ -103,6 +90,7 @@ export default class NewBill {
       fileName: this.fileName,
       status: "pending",
     };
+
     this.updateBill(bill);
     this.onNavigate(ROUTES_PATH["Bills"]);
   };
