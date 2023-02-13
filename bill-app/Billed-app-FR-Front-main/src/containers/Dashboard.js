@@ -80,9 +80,6 @@ export default class {
     $("#arrow-icon2").click((e) => this.handleShowTickets(e, bills, 2));
     $("#arrow-icon3").click((e) => this.handleShowTickets(e, bills, 3));
 
-    // added the function to fix the bug in the dashboard
-    this.getBillsAllUsers();
-
     new Logout({ localStorage, onNavigate });
   }
 
