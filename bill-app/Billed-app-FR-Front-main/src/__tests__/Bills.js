@@ -14,7 +14,7 @@ import router from "../app/Router.js";
 
 describe("Given I am connected as an employee", () => {
   describe("When I am on Bills Page", () => {
-    test("Then bill icon in vertical layout should be highlighted", async () => {
+    test("Then bill icon in vertical layout should be highlighted", () => {
       Object.defineProperty(window, "localStorage", {
         value: localStorageMock,
       });
@@ -29,7 +29,6 @@ describe("Given I am connected as an employee", () => {
       document.body.append(root);
       router();
       window.onNavigate(ROUTES_PATH.Bills);
-      await waitFor(() => screen.getByTestId("icon-window"));
       const windowIcon = screen.getByTestId("icon-window");
       //to-do write expect expression
       expect(windowIcon.classList.contains("active-icon")).toEqual(true);
