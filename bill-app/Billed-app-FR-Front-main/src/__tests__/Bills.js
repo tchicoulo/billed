@@ -30,7 +30,6 @@ describe("Given I am connected as an employee", () => {
       router();
       window.onNavigate(ROUTES_PATH.Bills);
       const windowIcon = screen.getByTestId("icon-window");
-      //to-do write expect expression
       expect(windowIcon.classList.contains("active-icon")).toEqual(true);
     });
 
