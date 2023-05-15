@@ -27,10 +27,10 @@ export default class NewBill {
 
   handleChangeFile = (e) => {
     e.preventDefault();
+
     let file = this.document.querySelector(`input[data-testid="file"]`)
       .files[0];
-    const filePath = e.target.value.split(/\\/g);
-    const fileName = filePath[filePath.length - 1];
+    const fileName = file.name;
     const formData = new FormData();
 
     let extensionFile = fileName.split(".")[1];
@@ -62,7 +62,7 @@ export default class NewBill {
         });
     } else {
       alert(
-        "L'extension de l'image n'est pas autorisée. \n Extensions d'image acceptées : 'jpg', 'jpeg', 'png'"
+        "Extention de fichier non valide. \n Extensions de fichiers acceptées : 'jpg', 'jpeg', 'png'"
       );
       e.target.value = "";
     }

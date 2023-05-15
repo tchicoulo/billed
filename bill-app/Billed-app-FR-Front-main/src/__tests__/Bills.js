@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { screen, waitFor } from "@testing-library/dom";
+import { screen } from "@testing-library/dom";
 import BillsUI from "../views/BillsUI.js";
 import Bills from "../containers/Bills.js";
 import userEvent from "@testing-library/user-event";
@@ -75,8 +75,8 @@ describe("Given I am connected as an employee", () => {
           userEvent.click(icon);
         });
         const fileModal = document.getElementById("modaleFile");
-        expect(fileModal).toBeTruthy();
 
+        expect(fileModal).toBeTruthy();
         expect(handleClickIconEye).toHaveBeenCalled();
       });
     });
@@ -88,7 +88,6 @@ describe("Given I am connected as an employee", () => {
 describe("Given I am a user connected as Employee", () => {
   describe("When I navigate to bills", () => {
     test("fetches bills from mock API GET", async () => {
-      jest.spyOn(mockStore, "bills");
       const store = mockStore.bills();
       const billsList = await store.list();
 
