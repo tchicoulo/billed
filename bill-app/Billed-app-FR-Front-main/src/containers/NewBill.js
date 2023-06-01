@@ -37,7 +37,8 @@ export default class NewBill {
     localStorage.setItem("ExtentionFile", extensionFile);
     let getFileExtension = localStorage.getItem("ExtentionFile");
 
-    //Condition* Verifier l'extension de l'image
+    // Bug Hunt #3 Condition extension file
+
     if (
       getFileExtension === "jpg" ||
       getFileExtension === "jpeg" ||

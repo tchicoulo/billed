@@ -24,6 +24,7 @@ export default class Login {
     );
     formAdmin.addEventListener("submit", this.handleSubmitAdmin);
   }
+
   handleSubmitEmployee = (e) => {
     e.preventDefault();
     const user = {
@@ -47,6 +48,9 @@ export default class Login {
         console.log(err + "// This employee profile doesn't exist")
       );
   };
+
+  // Bug report #2 (wrong data-testid
+  // on user.email and user.password = employee => admin)
 
   handleSubmitAdmin = (e) => {
     e.preventDefault();

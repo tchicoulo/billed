@@ -19,6 +19,8 @@ const row = (bill) => {
     `;
 };
 
+// Bug report #1 (sort Bills)
+
 const rows = (data) => {
   return data && data.length
     ? data

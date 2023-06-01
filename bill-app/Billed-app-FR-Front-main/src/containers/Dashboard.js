@@ -141,7 +141,8 @@ export default class {
   };
 
   handleShowTickets(e, bills, index) {
-    // Loop to remove the targeted event (bug dashboard)
+    //Bug hunt #4 Dashboard
+    // Loop to remove the targeted handleShowtickets
     bills.forEach((bill) => {
       $(`#open-bill${bill.id}`).off("click");
     });
